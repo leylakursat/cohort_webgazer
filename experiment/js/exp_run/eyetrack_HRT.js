@@ -111,7 +111,10 @@ function make_slides(f) {
           console.log("elapsed time: ", elapsedTime)
           var xprediction = data.x;
           var yprediction = data.y;
-          exp.tlist.push(elapsedTime);
+          var unixtime = Date.now(); // unix timestamp - so you have absolute timestamps
+
+          exp.tlist.push(elapsedTime); // this is the elapsed time since webgazer initialized
+          exp.unixtlist.push(unixtime);
           exp.xlist.push(xprediction);
           exp.ylist.push(yprediction);
         });
@@ -136,6 +139,7 @@ function make_slides(f) {
         this.log_responses();
         _stream.apply(this);
         exp.tlist = [];
+        exp.unixtlist = [];
         exp.xlist = [];
         exp.ylist = [];
         exp.clicked = null;
@@ -179,7 +183,8 @@ function make_slides(f) {
         "aud_duration" : aud_dur,
         "audio_loaded_time" : exp.audloadedTime,
         "trial_no" : exp.trial_no,
-        'time' : exp.tlist,
+        "webgazer_time" : exp.tlist,
+        "unix_time" : exp.unixtlist,
         'x' : exp.xlist,
         'y': exp.ylist
       });
@@ -269,6 +274,7 @@ function init_explogic() {
 
   //Initializing data frames
   exp.tlist = [];
+  exp.unixtlist = [];
   exp.xlist = [];
   exp.ylist = [];
   exp.clicked = null
@@ -333,7 +339,7 @@ function init_explogic() {
       // set onclick behaviour
       var images = document.querySelectorAll('.imgs');
       images.forEach(function(img) {
-        $(img).css("border","0px");          
+        $(img).css("border","0px");
         img.addEventListener('click', function() {
           if (document.getElementById("aud").ended & exp.endPreview == true){
             exp.img_selection_rt = Date.now() - _s.trial_start
@@ -374,7 +380,7 @@ function init_explogic() {
             exp.audloadedTime = Date.now()
           };
         }, 500); // preview imgs for 3 secs
-        
+
         $("#imgwrapper").show();
         $("#img_table").show();
       };
@@ -403,7 +409,7 @@ function init_explogic() {
               if (window.innerWidth >=  exp.minWindowWidth & window.innerHeight >= exp.minWindowHeight){
                 exp.startT = Date.now();
                 exp.go();
-                // COMMENT FOR TESTING
+
                 if (!exp.DUMMY_MODE){
                   ClearCanvas();
                   helpModalShow();
