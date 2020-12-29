@@ -31,8 +31,8 @@ function make_slides(f) {
       init_webgazer();
     },
     finish_calibration_start_task: function (e) {
-      if (precision_measurement > PRECISION_CUTOFF) {
-        // hide webgazer  video feed and prediction points
+      if (precision_measurement >= PRECISION_CUTOFF) {
+        // hide webgazer video feed and prediction points
         hideVideoElements();
 
         webgazer.pause();
@@ -228,10 +228,10 @@ function make_slides(f) {
 function init_explogic() {
 
   //Experiment constants
-  exp.DUMMY_MODE = false // set to true if want to test without eyetracking
+  exp.DUMMY_MODE = true // set to true if want to test without eyetracking
   exp.N_TRIALS = 54
   PRECISION_CUTOFF = 50;
-  // size of imgs - just for ur records
+  // size of imgs - just for your records
   IMG_HEIGHT = 473
   IMG_WIDTH = 467
 
@@ -259,24 +259,24 @@ function init_explogic() {
   exp.accuracy_attempts = []
 
   // INITIALIZE EXP LIST
+
   // ppt is randomly assigned a list at init.
   var exp_list_nos = ['A1', 'A2', 'B1', 'B2']
   exp.exp_list_no = _.shuffle(exp_list_nos).pop(); // randomly pick a list
-  //console.log("exp.exp_list_no", exp.exp_list_no);
   exp.current_exp_list = exp_lists.filter(a => a.exp_list == exp.exp_list_no);
   exp.current_exp_list = _.shuffle(exp.current_exp_list);
-  // exp.current_exp_list = exp.current_exp_list.slice(1, 3) // Use for testing whether responses etc getting logged properly i.e just have a few trials
+  // exp.current_exp_list = exp.current_exp_list.slice(1, 3) // Use for testing that responses are getting logged correctly
 
   // Trial set up (see init_trial_detials.js)
   // assign_imgs_to_trials();
   // add_practice_trials();
-  add_scenenames();
+  // add_scenenames();
   preloadmedia();
 
   exp.display_imgs = function (trial) {
     $("#imgwrapper").hide();
     $("#img_table").hide();
-    
+
     // change the images
     $("#img_left").attr('src', "static/imgs/" + trial.img_left);
     $("#img_right").attr("src", "static/imgs/" + trial.img_right);
@@ -296,7 +296,7 @@ function init_explogic() {
             exp.clicked = trial.img_right
           }
           if (!exp.DUMMY_MODE) {
-            webgazer.pause();
+            webgazer.pause(); // pause once img has been selected as trial is over
           }
           setTimeout(function () {
             $("#imgwrapper").hide();
@@ -320,11 +320,12 @@ function init_explogic() {
         aud_dur = aud.duration;
         exp.audloadedTime = Date.now()
       };
-    }, 500); // preview imgs
+    }, 500); // preview imgs for 500ms
 
     $("#imgwrapper").show();
     $("#img_table").show();
   };
+
 
   //blocks of the experiment:
   if (!exp.DUMMY_MODE) {

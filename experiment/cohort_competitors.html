@@ -24,7 +24,7 @@
 
 
   <!-- main exp logic: -->
-  <script src="js/exp_run/eyetrack_HRT.js"></script>
+  <script src="js/exp_run/cohort_competitors.js"></script>
 
   <!--CSS-->
   <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
@@ -36,7 +36,7 @@
 
   <!-- webgazer tools -->
   <script src="js/webgazer_tools/resize_canvas.js"></script>
-  <script src="js/webgazer_tools/calibration_functions.js"></script>
+  <script src="js/webgazer_tools/calibration.js"></script>
   <script src="js/webgazer_tools/main.js"></script>
   <script src="js/webgazer_tools/precision_calculation.js"></script>
   <script src="js/webgazer_tools/precision_store_points.js"></script>
@@ -44,12 +44,10 @@
   <script src="js/webgazer_tools/webgazer_start_stop.js"></script>
 
   <!-- experiment files and exp logic-->
-  <script src="js/exp_files/img_fnames.js"></script>
+  <!-- <script src="js/exp_files/img_fnames.js"></script> -->
   <script src="js/exp_files/exp_lists.js"></script>
+  <script src="js/exp_files/init_trial_detials.js"></script>
   <script src="js/exp_files/scene_names.js"></script>
-
-  <!-- initialize trial order -->
-  <!-- <script src="js/exp_run/init_trial_order.js"></script> -->
 
 
 
@@ -64,7 +62,7 @@
     <div class="text-center">
       <img src="mystery_speaker.png" alt="speaker" id="speakerpic"></img>
       <p id="study_title"><b> Listen to the audio and select the image! </b></p>
-      <!-- <br> -->
+
 
       <div class="card bg-light mb-3">
         <div class="card-body">
@@ -73,7 +71,7 @@
             Your task is to select the image referred to in the sentence you heard. </p>
         </div>
       </div>
-      
+
       <div class="card border-success mb-3">
         <div class="card-body">
           <h5 class="card-title"> Webcam </h5>
@@ -125,7 +123,7 @@
             <b> Your current browser width is: <span id="width"></span></b>
             <br>
             <b> Your current browser height is: <span id="height"></span></b>
-            <!-- <span id="dimensions"></span></b> -->
+
             <script>
               $(window).resize(function () {
                 $("#width").html($(window).width());
@@ -142,7 +140,7 @@
             <ul>
               <li> You must be using a desktop or laptop with a webcam - you can't use a tablet or cell phone </li>
               <li> The computer should be placed on a hard surface (e.g. table or desk) </li>
-              <li> The webcam should be at eye-level, facing you head-on </li>
+              <li> The webcam should be at eye-level, facing you head-on: if it's not built-in to your device, it should be placed just above your monitor, at the center. </li>
               <li> You must be in a brightly lit room, with your face fully illuminated, and no major light sources
                 (e.g. windows) behind you </li>
               <li> Throughout the task, please try not to move around too much </li>
@@ -156,8 +154,9 @@
           <h5 class="card-title"> Calibration Phase </h5>
           <p class="card-text">
             Once you click Start, you will be enter a 'Calibration' phase before starting the task, where you can check
-            that your head is in the correct position and your face is fully illuminated. After completing the
-            Calibration, you will proceed to the task.
+            that your head is in the correct position and your face is fully illuminated.
+            You may need to move closer to your webcam in order to ensure that your head is in the correct position.
+            After completing the Calibration, you will proceed to the task.
             <br>
             <b> IMPORTANT: You may need to perform the Calibration several times to achieve the required accuracy score
               (50%).
@@ -182,27 +181,7 @@
       <button id="start_button" type="button">Start</button> <br><br>
 
       <p id="legal"> <b>LEGAL INFORMATION:</b>
-        Please read the information below. By clicking Start, you agree that you have read the information and consent
-        to participate in the survey.
-        We invite you to participate in a research study on language production and comprehension. Your experimenter
-        will ask you to do a linguistic task such as reading sentences or words, naming pictures or describing scenes,
-        making up sentences of your own, or participating in a simple language game.
-        <br>
-        There are no risks or benefits of any kind involved in this study. You will be paid for your participation at
-        the posted rate. If you have read this form and have decided to participate in this experiment, please
-        understand your participation is voluntary and you have the right to withdraw your consent or discontinue
-        participation at any time without penalty or loss of benefits to which you are otherwise entitled. You have the
-        right to refuse to do particular tasks. Your individual privacy will be maintained in all published and written
-        data resulting from the study. You may print this form for your records.
-        <br>
-        <b>CONTACT INFORMATION:</b>
-        If you have any questions, concerns or complaints about this research study, its procedures, risks and benefits,
-        you should contact the Protocol Director Meghan Sumner at (650)-725-9336.
-        If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or
-        general questions about the research or your rights as a participant, please contact the Stanford Institutional
-        Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at
-        1-866-680-2906. You can also write to the Stanford IRB, Stanford University, 3000 El Camino Real, Five Palo Alto
-        Square, 4th Floor, Palo Alto, CA 94306 USA.
+        IRB CONSENT FORM GOES HERE
         <br>
         If you agree to participate, please proceed to the study tasks. </p>
     </div>
@@ -274,12 +253,11 @@
       <audio id="aud">></audio>
     </div>
 
-    <!-- img personas -->
+    <!-- visual stimuli go here -->
     <div class="imgwrapper" id="imgwrapper">
       <table id="img_table" width=1280>
         <tr>
           <td width="640">
-            <!-- original dimensions: td width= 640, img_height=500, img_width=167, marginRight=473 -->
             <img id="img_left" class='imgs' height=300 width=300></img>
           </td>
           <td width="640">

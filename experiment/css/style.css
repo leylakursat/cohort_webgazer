@@ -6,9 +6,6 @@ table {
 	margin: auto;
 }
 
-
-
-
 /*the experiment happens in "slides"*/
 /* .slide { */
 body{
@@ -51,8 +48,6 @@ ul {
 #overlay {
     z-index: 1;
 }
-
-
 
 /* Navbar styling */
 #webgazerNavbar {
@@ -173,14 +168,6 @@ li {
 
 
 
-/* JUST FOR TESTING PLACEMENT OF  IMGS IN TABLES */
-/* table, th, td {
-  border: 1px solid black;
-} */
-
-
-/*make the subj_info slide prettier*/
-
 .subj_info_title {
 	color:#036;
 	background:transparent;
@@ -244,12 +231,6 @@ p.descriptor {
    transform: translate(-50%, -50%);
 }
 
-
-#img_table_test {
-	width: 1280;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 #img_right {
         float:right;
