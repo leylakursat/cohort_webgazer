@@ -268,9 +268,6 @@ function init_explogic() {
   // exp.current_exp_list = exp.current_exp_list.slice(1, 3) // Use for testing that responses are getting logged correctly
 
   // Trial set up (see init_trial_detials.js)
-  // assign_imgs_to_trials();
-  // add_practice_trials();
-  // add_scenenames();
   preloadmedia();
 
   exp.display_imgs = function (trial) {
