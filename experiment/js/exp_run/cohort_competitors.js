@@ -228,7 +228,7 @@ function make_slides(f) {
 function init_explogic() {
 
   //Experiment constants
-  exp.DUMMY_MODE = true // set to true if want to test without eyetracking
+  exp.DUMMY_MODE = false // set to true if want to test without eyetracking
   exp.N_TRIALS = 54
   PRECISION_CUTOFF = 50;
   // size of imgs - just for your records
