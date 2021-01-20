@@ -42,8 +42,10 @@ function make_slides(f) {
       else {
         exp.accuracy_attempts.push(precision_measurement);
         swal({
-          title: "Calibration Fail",
-          text: "Either you haven't performed the calibration yet, or your calibration score is too low. Your calibration score must be 50% to begin the task. Please click Recalibrate to try calibrating again.",
+          title:"Calibration Fail",
+          text: "Either you haven't performed the calibration yet, or your calibration score is too low. \
+           Your calibration score must be 50% to begin the task. Please click Calibrate to try calibrating again. \
+           Click Instructions to see tips for calibrating.",
           buttons: {
             cancel: false,
             confirm: true
